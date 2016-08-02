@@ -9,21 +9,24 @@
 #import "ResultViewController.h"
 
 @interface ResultViewController ()
-
+@property NSMutableArray *result;
 @end
 
 @implementation ResultViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
+    _result=[[NSMutableArray alloc] init];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
+    [_result removeAllObjects];
     sqlite3 *db;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documents = [paths objectAtIndex:0];
     NSString *database_path = [documents stringByAppendingPathComponent:@"OcgData.sqlite3"];
+    //NSLog(@"%@",database_path);
     
     if (sqlite3_open([database_path UTF8String], &db) != SQLITE_OK) {
         sqlite3_close(db);
@@ -31,7 +34,7 @@
     }
     
     sqlite3_stmt * statement;
-    _sqlStatement=[_sqlStatement stringByAppendingFormat:@" limit %d,20",(_page-1)*20];
+    //_sqlStatement=[_sqlStatement stringByAppendingFormat:@" limit %ld,20",(_page-1)*20];
     
     if (sqlite3_prepare_v2(db, [_sqlStatement UTF8String], -1, &statement, nil) == SQLITE_OK) {
         while (sqlite3_step(statement) == SQLITE_ROW) {
@@ -39,14 +42,23 @@
             
             char *tmp = (char*)sqlite3_column_text(statement, 3);
             NSString *scName = [[NSString alloc]initWithUTF8String:tmp];
-            
+            	
             tmp = (char*)sqlite3_column_text(statement, 2);
             NSString *jpName = [[NSString alloc]initWithUTF8String:tmp];
             
-            NSLog(@"id:%d  中文名:%@  日文名:%@",cardID,scName, jpName);
+            NSMutableDictionary *card=[[NSMutableDictionary alloc] init];
+            
+            [card setValue:[NSNumber numberWithInt:cardID]  forKey:@"id"];
+            [card setValue:scName forKey:@"scName"];
+            [card setValue:jpName forKey:@"jpName"];
+            
+            [_result addObject:card];
+            
+            //NSLog(@"id:%d  中文名:%@  日文名:%@",cardID,scName, jpName);
         }
     }
     sqlite3_close(db);
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -58,23 +70,27 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 //warning Incomplete implementation, return the number of sections
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 //warning Incomplete implementation, return the number of rows
-    return 0;
+    return _result.count;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+    }
+    NSMutableDictionary *card=[_result objectAtIndex:indexPath.row];
+    cell.textLabel.text=[card valueForKey:@"scName"];
     // Configure the cell...
     
     return cell;
 }
-*/
+
 
 /*
 // Override to support conditional editing of the table view.
