@@ -11,6 +11,8 @@
 		043AAE4E1CB39498001BB209 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 043AAE4D1CB39498001BB209 /* MainViewController.m */; };
 		043AAE511CB3A59A001BB209 /* TabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 043AAE501CB3A59A001BB209 /* TabBarViewController.m */; };
 		043AAE541CB3A6CE001BB209 /* ResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 043AAE531CB3A6CE001BB209 /* ResultViewController.m */; };
+		0444029E1F84F27200B6309C /* OcgData.s3db in Resources */ = {isa = PBXBuildFile; fileRef = 0444029D1F84F27200B6309C /* OcgData.s3db */; };
+		044402A21F84FC8E00B6309C /* QueryBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 044402A11F84FC8E00B6309C /* QueryBuilder.m */; };
 		04BC3CE81CB3900C0014A32B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BC3CE71CB3900C0014A32B /* main.m */; };
 		04BC3CEB1CB3900C0014A32B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BC3CEA1CB3900C0014A32B /* AppDelegate.m */; };
 		04BC3CEE1CB3900C0014A32B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BC3CED1CB3900C0014A32B /* ViewController.m */; };
@@ -47,6 +49,9 @@
 		043AAE501CB3A59A001BB209 /* TabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarViewController.m; sourceTree = "<group>"; };
 		043AAE521CB3A6CE001BB209 /* ResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultViewController.h; sourceTree = "<group>"; };
 		043AAE531CB3A6CE001BB209 /* ResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultViewController.m; sourceTree = "<group>"; };
+		0444029D1F84F27200B6309C /* OcgData.s3db */ = {isa = PBXFileReference; lastKnownFileType = file; path = OcgData.s3db; sourceTree = "<group>"; };
+		044402A11F84FC8E00B6309C /* QueryBuilder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QueryBuilder.m; sourceTree = "<group>"; };
+		044402A31F85028800B6309C /* QueryBuilder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QueryBuilder.h; sourceTree = "<group>"; };
 		04BC3CE31CB3900C0014A32B /* YuGiOh Card Database.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "YuGiOh Card Database.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		04BC3CE71CB3900C0014A32B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		04BC3CE91CB3900C0014A32B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -136,6 +141,7 @@
 		04BC3CE51CB3900C0014A32B /* YuGiOh Card Database */ = {
 			isa = PBXGroup;
 			children = (
+				0444029D1F84F27200B6309C /* OcgData.s3db */,
 				043AAE4B1CB39474001BB209 /* Controllers */,
 				043AAE4A1CB3945A001BB209 /* Framework */,
 				04BC3CE91CB3900C0014A32B /* AppDelegate.h */,
@@ -148,6 +154,8 @@
 				04BC3CFA1CB3900C0014A32B /* Info.plist */,
 				04BC3CF21CB3900C0014A32B /* YuGiOh_Card_Database.xcdatamodeld */,
 				04BC3CE61CB3900C0014A32B /* Supporting Files */,
+				044402A31F85028800B6309C /* QueryBuilder.h */,
+				044402A11F84FC8E00B6309C /* QueryBuilder.m */,
 			);
 			path = "YuGiOh Card Database";
 			sourceTree = "<group>";
@@ -282,6 +290,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04BC3CF91CB3900C0014A32B /* LaunchScreen.storyboard in Resources */,
+				0444029E1F84F27200B6309C /* OcgData.s3db in Resources */,
 				04BC3CF61CB3900C0014A32B /* Assets.xcassets in Resources */,
 				04BC3CF11CB3900C0014A32B /* Main.storyboard in Resources */,
 			);
@@ -314,6 +323,7 @@
 				04BC3CEB1CB3900C0014A32B /* AppDelegate.m in Sources */,
 				043AAE4E1CB39498001BB209 /* MainViewController.m in Sources */,
 				043AAE511CB3A59A001BB209 /* TabBarViewController.m in Sources */,
+				044402A21F84FC8E00B6309C /* QueryBuilder.m in Sources */,
 				04BC3CE81CB3900C0014A32B /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -456,7 +466,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "YuGiOh Card Database/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dragonballsoft.YuGiOh-Card-Database";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -468,7 +478,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "YuGiOh Card Database/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dragonballsoft.YuGiOh-Card-Database";
 				PRODUCT_NAME = "$(TARGET_NAME)";

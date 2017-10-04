@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "ResultViewController.h"
 #import <sqlite3.h>
+#import "QueryBuilder.h"
 
 @interface MainViewController : UITableViewController
 

@@ -19,8 +19,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -31,7 +29,18 @@
 - (IBAction)search:(id)sender {
     UINavigationController *temp = (UINavigationController *)[super.tabBarController.viewControllers objectAtIndex:1];
     ResultViewController *tempShua = (ResultViewController *)temp.topViewController;
-    tempShua.sqlStatement = @"SELECT * FROM CardData";
+    
+    QueryBuilder *qb=[[QueryBuilder alloc] init];
+    [[qb select:@"*"] from:@"CardData"];
+    if (![_SCCardNameText.text isEqualToString:@""]) {
+        [qb andWhere:@"SCCardName like \"%:scname%\"" withParams: [NSDictionary dictionaryWithObjectsAndKeys:_SCCardNameText.text, @":scname", nil]];
+    }
+    if (![_JPCardName.text isEqualToString:@""]) {
+        [qb andWhere:@"JPCardName like \"%:jpname%\"" withParams: [NSDictionary dictionaryWithObjectsAndKeys:_JPCardName.text, @":jpname", nil]];
+    }
+    //tempShua.sqlStatement = [NSString stringWithFormat:@"SELECT * FROM CardData %@", [qb getWhereStatement]];
+    tempShua.sqlStatement = [qb getSQL];
+    NSLog(@"%@", tempShua.sqlStatement);
     
     [self.tabBarController setSelectedIndex:1];
 }

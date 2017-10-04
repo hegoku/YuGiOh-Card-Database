@@ -25,7 +25,8 @@
     sqlite3 *db;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documents = [paths objectAtIndex:0];
-    NSString *database_path = [documents stringByAppendingPathComponent:@"OcgData.sqlite3"];
+    //NSString *database_path = [documents stringByAppendingPathComponent:@"OcgData.sqlite3"];
+    NSString *database_path = [[NSBundle mainBundle] pathForResource:@"OcgData" ofType:@"s3db"];
     //NSLog(@"%@",database_path);
     
     if (sqlite3_open([database_path UTF8String], &db) != SQLITE_OK) {
@@ -89,6 +90,12 @@
     // Configure the cell...
     
     return cell;
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSMutableDictionary *card=[_result objectAtIndex:indexPath.row];
+    NSLog(@"%@", [card valueForKey:@"scName"]);
+    return indexPath;
 }
 
 
